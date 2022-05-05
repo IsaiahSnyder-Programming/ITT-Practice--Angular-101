@@ -3,9 +3,9 @@
     <label for="firstName">First Name</label>
     <input required minlength="3" maxlength="10" pattern="banana" ngModel name="firstName" #firstName="ngModel" (change)="firstName" id="firstName" type="text" class="form-control">
     <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">
-      <div *ngIf="firstName.errors?.['required']">Required</div>
-      <div *ngIf="firstName.errors?.['minlength']">minlength</div>
-      <div *ngIf="firstName.errors?.['pattern']">pattern</div>
+      <div *ngIf="firstName.errors?.['required']">First name is required</div>
+      <div *ngIf="firstName.errors?.['minlength']">First name must be a minimum of {{ firstName.errors?.['minlength'].requiredLength }} letters</div>
+      <div *ngIf="firstName.errors?.['pattern']">Pattern does not match</div>
     </div>
   </div>
   <div class="form-group">
