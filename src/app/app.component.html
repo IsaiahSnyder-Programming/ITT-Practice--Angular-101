@@ -1,5 +1,7 @@
 <courses></courses>
+<contact-form></contact-form>
 
+<!-- NOTE ngIf -->
 <div
   *ngIf="courses.length > 0;
     then coursesList;
@@ -13,5 +15,33 @@
 </ng-template>
 
 
+<!-- NOTE ngSwitchCase -->
+<ul>
+  <li [class.active]="viewMode == 'map'"><a (click)="viewMode = 'map'">Map View</a></li>
+  <li [class.active]="viewMode == 'list'"><a (click)="viewMode = 'list'">List View</a></li>
+</ul>
 
-<contact-form></contact-form>
+<div [ngSwitch]="viewMode">
+  <div *ngSwitchCase="'map'">Map View Content</div>
+  <div *ngSwitchCase="'list'">List View Content</div>
+  <div *ngSwitchDefault>Otherwise</div>
+</div>
+
+
+<!-- NOTE ngFor -->
+<ul>
+  <li *ngFor="let course of courseObjects; index as i; even as isEven">
+    {{ i }} - {{ course.name }} <span *ngIf="isEven" class="bg-danger">EVEN</span>
+  </li>
+</ul>
+
+
+<!-- NOTE ngFor and detection change -->
+<button (click)="onAdd()">Add</button>
+<ul>
+  <li *ngFor="let course of courseObjects">
+    {{ course.name }}
+    <button (click)="onRemove(course)">Remove</button>
+    <button (click)="onChange(course)">Change</button>
+  </li>
+</ul>
